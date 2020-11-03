@@ -10,7 +10,7 @@
         <script src="https://kit.fontawesome.com/599eedc4d1.js" crossorigin="anonymous"></script>
 
 
-        <link href="https://fonts.googleapis.com/css2?family=Candal&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Candal&family=Hind:wght@300&display=swap" rel="stylesheet">
         
 
         <!-- Custom Styling -->
@@ -20,28 +20,12 @@
         <!-- Admin Styling -->
         <link rel="stylesheet" href="assets/css/admin.css">
 
-        <title>Admin - Add Post</title>
+        <title>Add Post</title>
     </head>
 
     <body>
-        <header>
-            <a class="logo" href="<?php echo BASE_URL . '/index.php';?>">
-                <h1 class="logo-text"><span>Blog</span>Inspires</h1>
-            </a>
-            <i class="fa fa-bars menu-toggle"></i>
-            <ul class="nav">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-user"></i>
-                        j
-                        <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
-                    </a>
-                    <ul>
-                        <li><a href="#" class="logout">logout</a></li>
-                    </ul>
-                </li>  
-            </ul>
-        </header>
+     
+    <?php include(ROOT_PATH . "/app/includes/header.php"); ?>
 
         
         <!-- Admin page wrapper -->
@@ -54,26 +38,25 @@
         
             <div class="admin-content">
                 <div class="button-group">
-                    <a href="Postindex.php" class="btn btn-big">Post</a>
-                    <a href="index.php" class="btn btn-big">Manage Posts</a>
+                    <a href="Postindex.php" class="btn btn-big">View Post</a>
                 </div>
 
                 <div class="content">
-                    <h2 class="page-title">Manage posts</h2>
+                    <h2 class="page-title">Create Post</h2>
                     <?php include(ROOT_PATH . '/app/helpers/formErrors.php') ?>
 
-                    <form action="create.php" method="post">
+                    <form action="create.php" method="post" enctype="multipart/form-data">
                         <div>
-                            <label>title</label>
+                            <label>Title</label>
                             <input type="text" name="title" value="<?php echo $title ?>" class="text-input">
                         </div>
                         <div>
-                            <label>image</label>
+                            <label>Image</label>
                             <input type="file" name="image" class="text-input">
                         </div>
                         <div>
-                            <label>body</label>
-                            <textarea name="body" id="body" cols="30" rows="10"><?php echo $body ?></textarea>
+                            <label>Body</label>
+                            <textarea name="body" id="body" cols="60" rows="10"><?php echo $body ?></textarea>
                         </div>
                         <div>
                             

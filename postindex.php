@@ -1,5 +1,10 @@
-<?php include("path.php") ?>
-<?php include(ROOT_PATH . "/app/controllers/posts.php")?>
+<?php include("path.php"); 
+include(ROOT_PATH . "/app/database/db.php");
+
+$posts = getPublishedPosts();
+
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,14 +13,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
         <!-- font awesome -->
-        <link rel ="styleheet"
-            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pQbqyi7RrhN7udi9RwhKkMHpvLBHG9Sr"
-            crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/599eedc4d1.js" crossorigin="anonymous"></script>
         
         <!-- google fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Scandal|Lora"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Candal&family=Hind:wght@300&display=swap" rel="stylesheet">
         
 
         <!-- Custom Styling -->
@@ -25,42 +26,22 @@
         <!-- Admin Styling -->
         <link rel="stylesheet" href="assets/css/admin.css">
 
-        <title>Admin - Manage Posts</title>
+        <title> Manage Posts</title>
     </head>
 
     <body>
-        <header>
-            <a class="logo" href="<?php echo BASE_URL . '/index.php';?>">
-                <h1 class="logo-text"><span>Blog</span>Inspires</h1>
-            </a>
-            <i class="fa fa-bars menu-toggle"></i>
-            <ul class="nav">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-user"></i>
-                        j
-                        <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
-                    </a>
-                    <ul>
-                        <li><a href="#" class="logout">logout</a></li>
-                    </ul>
-                </li>  
-            </ul>
-        </header>
+
+    <?php include(ROOT_PATH . "/app/includes/header.php"); ?>
 
         
         <!-- Admin page wrapper -->
         <div class="admin-wrapper">
-
-<!-- Left sidebar -->
-        <!-- //Left sidebar -->
 
 
             <!-- admin content -->
             <div class="admin-content">
                 <div class="button-group">
                     <a href="create.php" class="btn btn-big">Add Post</a>
-                    <a href="index.php" class="btn btn-big">Manage Post</a>
                 </div>
 
                 <div class="content">
@@ -72,7 +53,7 @@
                         <thead>
                             <th>SN</th>
                             <th>Title</th>
-                            <th>Author</th>
+                            <th>Username</th>
                             <th colspan="">Action</th>
                         </thead>
 
@@ -81,14 +62,14 @@
                                 <tr>
                                 <td><?php echo $key + 1; ?></td>
                                 <td><?php echo $post['title'] ?></td>
-                                <td>JJ</td>
-                                <td><a href="#" class="edit">edit</a></td>
-                                <td><a href="#" class="delete">Delete</a></td>
+                                <td><?php echo $post['username'] ?></td>
+                                <td><a href="edit.php?id=<?php echo $post['id']; ?>" class="edit">Edit</a></td>
+                                <td><a href="edit.php?delete_id=<?php echo $post['id']; ?>" class="delete">Delete</a></td>
 
-                                <?php if ( $post['published'] ) : ?>
-                                    <td><a href="#" class="unpublish">UNPublish</a></td>
+                                <?php if ( $post['published']): ?>
+                                    <td><a href="edit.php?published=0&p_id=<?php echo $post['id']?>" class="unpublish">Unpublish</a></td>
                                 <?php else: ?>
-                                    <td><a href="#" class="publish">Publish</a></td>
+                                    <td><a href="edit.php?published=1&p_id=<?php echo $post['id']?>" class="publish">Publish</a></td>
                                 <?php endif; ?>
                                 
                                 
@@ -117,6 +98,6 @@
 
         <!--Custom script-->
 
-        <script src="../../assets/js/scripts.js"></script>
+        <script src="/assets/js/scripts.js"></script>
     </body>
 </html>

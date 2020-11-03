@@ -8,14 +8,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
         <!-- font awesome -->
-        <link rel ="styleheet"
-            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pQbqyi7RrhN7udi9RwhKkMHpvLBHG9Sr"
-            crossorigin="anonymous">
-        
+        <script src="https://kit.fontawesome.com/599eedc4d1.js" crossorigin="anonymous"></script>
         <!-- google fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Scandal|Lora"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Candal&family=Hind:wght@300&display=swap" rel="stylesheet">
+
         
 
         <!-- Custom Styling -->
@@ -25,28 +21,11 @@
         <!-- Admin Styling -->
         <link rel="stylesheet" href="assets/css/admin.css">
 
-        <title>Admin - Edit Post</title>
+         <title> Edit Post</title>
     </head>
 
     <body>
-        <header>
-            <a class="logo" href="<?php echo BASE_URL . '/index.php';?>">
-                <h1 class="logo-text"><span>Blog</span>Inspires</h1>
-            </a>
-            <i class="fa fa-bars menu-toggle"></i>
-            <ul class="nav">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-user"></i>
-                        j
-                        <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
-                    </a>
-                    <ul>
-                        <li><a href="#" class="logout">logout</a></li>
-                    </ul>
-                </li>  
-            </ul>
-        </header>
+    <?php include(ROOT_PATH . "/app/includes/header.php"); ?>
 
         
         <!-- Admin page wrapper -->
@@ -63,24 +42,42 @@
                 </div>
 
                 <div class="content">
-                    <h2 class="page-title">Edit posts</h2>
+                    <h2 class="page-title">Edit Post</h2>
+                    <?php include(ROOT_PATH . "/app/helpers/formErrors.php"); ?>
 
-                    <form action="create.php" method="post">
+                    <form action="edit.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?php echo $id ?>" >
                         <div>
                             <label>Title</label>
-                            <input type="text" name="title" class="text-input">
-                        </div>
-                        <div>
-                            <label>Body</label>
-                            <textarea name="body" id="body" cols="30" rows="10"></textarea>
+                            <input type="text" name="title" value="<?php echo $title ?>" class="text-input">
                         </div>
                         <div>
                             <label>Image</label>
                             <input type="file" name="image" class="text-input">
                         </div>
+                        <div>
+                            <label>Body</label>
+                            <textarea name="body" id="body" cols="60" rows="10"><?php echo $body ?></textarea>
+                        </div>
+                        <div>
+                            
+                            <?php if ( empty($published) && $published == 0): ?>
+                                <label>
+                                    <input type="checkbox" name="published">
+                                    Publish
+                                </label>
+                                
+                            <?php else: ?>
+                                <label>
+                                    <input type="checkbox" name="published" checked>
+                                    Publish
+                                </label>
+                            <?php endif; ?>
+                            
+                        </div>
 
                         <div>
-                            <button type="submit" class="btn btn-big">Add Posts</button>
+                            <button type="submit" name = "update-post" class="btn btn-big">Update Post</button>
                         </div>
                     </form>
 
